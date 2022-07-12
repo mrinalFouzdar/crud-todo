@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import { deleteTodos } from "../../Redux/Actions/actions";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import  "./home.module.css"
 import Button from "../../Container/Buttom/Button";
+import { useHook } from "../../CostomHooks/useHook";
 function Home() {
   const { tasks } = useSelector((state) => state.tasks);
+  const {handNevigate} = useHook()
   const [count,setCount]=useState(0)
   const [istimerRunning,setIstimerRunning]=React.useState(false)
   const timRef= React.useRef(null)
@@ -40,7 +42,6 @@ function Home() {
     return conver
   }
   // console.log(tasks);
-  const nevigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleDelete = (id) => {
@@ -48,9 +49,7 @@ function Home() {
     dispatch(deleteTodos(id));
   };
 
-  const handleNevigat = () => {
-    nevigate("/from");
-  };
+
 
 
   const handleTime=(target,cur)=>{
@@ -59,12 +58,9 @@ function Home() {
     }
     let[tar_h,tar_m]=target.split(":").map(Number)
     let[cur_h,cur_m]=cur.split(":").map(Number)
-    // console.log(tar_h);
-    // if()
-    // let show_time =(`${cur}`)
     let show_hour =(tar_h-cur_h)
     let show_min =Math.abs(tar_m-cur_m)
-    console.log(show_min);
+    // console.log(show_min);
     show_hour = (show_hour <=0? 0 : show_hour)
 
     if(show_hour <= 0 && show_min<=0 ){
@@ -79,7 +75,7 @@ function Home() {
   return (
     <div>
       <div>
-        <Button handlebtnClick={() => handleNevigat()}> ADD TODO</Button>
+        <Button handlebtnClick={() => handNevigate("/from")}> ADD TODO</Button>
       </div>
       <table>
         <thead>

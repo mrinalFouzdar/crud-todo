@@ -8,17 +8,8 @@ const From = () => {
   const {taskSingle } = useSelector((state) => state.tasks);
   const {id} = useParams()
   const dispatch = useDispatch()
-  const { formData, handleInputChange, handleSubmit, handNevigate ,setFormData} = useHook(
-    {
-      task: "",
-      time: "",
-    },
-    (formData) => {
-      console.log(formData);
-      console.log("hello");
-    }
-  );
-  console.log(id);
+  const { formData, handleInputChange, handleSubmit, handNevigate ,setFormData} = useHook();
+  // console.log(id);
 
   useEffect(()=>{
     if(id){
@@ -32,11 +23,11 @@ const From = () => {
   },[id])
 
   const handlefromDataSet=()=>{
-    console.log(taskSingle,"a");
+    // console.log(taskSingle,"a");
     if(taskSingle.length!==0 ){
-      setFormData({task:taskSingle.task,time:taskSingle.time})
+      setFormData({...taskSingle})
     }else{
-      handNevigate()
+      handNevigate("/")
     }  
   
 }
@@ -47,7 +38,7 @@ const From = () => {
   return (
     <div>
       <div>
-        <Button onClick={handNevigate}>GO BACK</Button>
+        <Button handlebtnClick={()=>handNevigate("/")}>GO BACK</Button>
       </div>
       <form onSubmit={(e)=>handleSubmit(e,id)}>
         <input

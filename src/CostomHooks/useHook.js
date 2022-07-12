@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { addUser, updateTodosData } from "../Redux/Actions/actions";
-export const useHook = (initialState = {}, onSubmit) => {
-  const [formData, setFormData] = useState(initialState);
+export const useHook = ( onSubmit) => {
+  const [formData, setFormData] = useState({
+    task:"",
+    time:"",
+    cmplt:false
+  });
   const nevigate = useNavigate()
   const dispatch = useDispatch()
   const handleInputChange = (e) => {
+    // console.log(formData)
+
     let {name,value}= e.target
     setFormData({ ...formData, [name]: value });
   };
@@ -19,16 +25,13 @@ export const useHook = (initialState = {}, onSubmit) => {
       return 
     }else{
       id? dispatch(updateTodosData(formData,id)) :dispatch(addUser(formData))
-      handNevigate()
+      handNevigate("/")
 
     }
-    console.log(onSubmit);
-    // onSubmit?.(formData);
-
   };
 
-  const handNevigate =()=>{
-    nevigate("/")
+  const handNevigate =(data)=>{
+    nevigate(data)
   }
 
   return { formData, handleInputChange, handleSubmit ,handNevigate,setFormData};
