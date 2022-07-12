@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import "./App.css";
+import From from "./Components/From/From";
+import Home from "./Components/home/Home";
+import { fetchTodosData } from "./Redux/Actions/actions";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchTodosData());
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      mohaprobhu
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/from" element={<From />} />
+        <Route path="/editbyId/:id" element={<From/>}/>
+      </Routes>
     </div>
   );
 }
