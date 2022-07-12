@@ -1,23 +1,24 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Button from "../../Container/Buttom/Button";
+import { DataFetchHook } from "../../CostomHooks/dataFetch";
 import { useHook } from "../../CostomHooks/useHook";
-import { removeselectedTodo, singleTodos } from "../../Redux/Actions/actions";
+import styled from "./from.module.css"
 const From = () => {
   const {taskSingle } = useSelector((state) => state.tasks);
   const {id} = useParams()
-  const dispatch = useDispatch()
   const { formData, handleInputChange, handleSubmit, handNevigate ,setFormData} = useHook();
-  // console.log(id);
+  const {fetchbyId,dataClenUp} =DataFetchHook()
+
 
   useEffect(()=>{
     if(id){
-      dispatch(singleTodos(id))
+      fetchbyId(id)
       handlefromDataSet()
   }
   return ()=>{
-    dispatch(removeselectedTodo())
+    dataClenUp()
   }
 
   },[id])
@@ -36,8 +37,9 @@ const From = () => {
   const { task, time } = formData;
 
   return (
-    <div>
-      <div>
+    <div >
+      <div className={styled.btn_div}>
+        {/* nevigate to home page */}
         <Button handlebtnClick={()=>handNevigate("/")}>GO BACK</Button>
       </div>
       <form onSubmit={(e)=>handleSubmit(e,id)}>
@@ -46,6 +48,8 @@ const From = () => {
           name="task"
           value={task ?task:""}
           onChange={handleInputChange}
+          className={styled.iptText}
+          placeholder="ADD..."
         />
         <br />
         <br />
@@ -55,6 +59,7 @@ const From = () => {
           name="time"
           value={time?time :""}
           onChange={handleInputChange}
+          
         />
         <br />
         <br />

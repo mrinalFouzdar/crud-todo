@@ -1,0 +1,44 @@
+
+.btn_div{
+    margin: 5vh;
+    font-size: large;
+
+}
+
+.iptText{
+    width: 15%;
+    border:none;
+    border-bottom: 1px solid #1890ff;
+    padding: 5px 10px;
+    outline: none;
+
+}
+[placeholder]:focus::-webkit-input-placeholder {
+    transition: text-indent 0.4s 0.4s ease; 
+    text-indent: -100%;
+    opacity: 1;
+ }
+
+input[type=time] {
+    /* border: none; */
+    color: #2a2c2d;
+    font-size: 14px;
+    font-family: helvetica;
+    width: 180px;
+  }
+
+  input[type=time]::-webkit-datetime-edit-fields-wrapper {
+    display: flex;
+  }
+
+  input[type=time]::-webkit-datetime-edit-hour-field {
+    background-color: #f2f4f5;
+    border-radius: 15%;
+    padding: 19px 13px;
+  }
+
+  input[type=time]::-webkit-datetime-edit-minute-field {
+    background-color: #f2f4f5;
+    border-radius: 15%;
+    padding: 19px 13px;
+  }

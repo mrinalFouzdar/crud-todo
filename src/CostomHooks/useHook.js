@@ -6,7 +6,8 @@ export const useHook = ( onSubmit) => {
   const [formData, setFormData] = useState({
     task:"",
     time:"",
-    cmplt:false
+    cmplt:false,
+    status:"Pending"
   });
   const nevigate = useNavigate()
   const dispatch = useDispatch()

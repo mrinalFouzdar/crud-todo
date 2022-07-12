@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
-import { deleteTodos } from "../../Redux/Actions/actions";
 import { Link } from "react-router-dom";
-import  "./home.module.css"
+import styled from "./home.module.css"
 import Button from "../../Container/Buttom/Button";
 import { useHook } from "../../CostomHooks/useHook";
+import { DataFetchHook } from "../../CostomHooks/dataFetch";
 function Home() {
   const { tasks } = useSelector((state) => state.tasks);
   const {handNevigate} = useHook()
+  const {deleteTodosData,upddateData} = DataFetchHook()
+
   const [count,setCount]=useState(0)
   const [istimerRunning,setIstimerRunning]=React.useState(false)
   const timRef= React.useRef(null)
@@ -42,17 +44,13 @@ function Home() {
     return conver
   }
   // console.log(tasks);
-  const dispatch = useDispatch();
-
-  const handleDelete = (id) => {
-    console.log(id);
-    dispatch(deleteTodos(id));
-  };
 
 
 
 
-  const handleTime=(target,cur)=>{
+
+
+  const handleTime=(target,cur,data)=>{
     if(!cur || !target){
       return "wait"
     }
@@ -64,12 +62,22 @@ function Home() {
     show_hour = (show_hour <=0? 0 : show_hour)
 
     if(show_hour <= 0 && show_min<=0 ){
+      data={...data,status:"FAILD"}
+      upddateData(data,data.id)
         return "FAILD"
     }else{
       return (`${show_hour}:${show_min}`)
     }
 
     
+  }
+
+  const handleToggle =(data,id)=>{
+      // console.log(data)
+      data = {...data,status:"DONE"}
+      // console.log(data)
+      upddateData(data,id)
+
   }
 
   return (
@@ -92,18 +100,22 @@ function Home() {
               <tr key={data.id}>
                 <td>{data.task}</td>
                 <td>
-                {handleTime(data.time,count)}
+              <span>{ data.status==="DONE" ? data.status:data.status ==="FAILD" ? "FAILD":handleTime(data.time,count,data)}</span> 
+                <Button handlebtnClick={()=>handleToggle(data,data.id)} handelDisable={data.status==="DONE" || data.status==="FAILD"}> Stuaus Change</Button>
                 </td>
                 <td>
-                  <Button handlebtnClick={()=>handleDelete(data.id)}>
-                    <AiFillDelete />
+                  <Button handlebtnClick={()=>deleteTodosData(data.id)} >
+                    <AiFillDelete className={styled.btn}/>
                   </Button>
-                  <Button >
+                  {
+                    data.status==="DONE" || data.status==="FAILD" ? null :
+                  <Button>
                     <Link to={`/editbyId/${data.id}`}
                     >
-                    <AiFillEdit />
+                    <AiFillEdit className={styled.btn}/>
                     </Link>
                   </Button>
+                  }
                 </td>
               </tr>
             ))}

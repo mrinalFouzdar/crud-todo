@@ -1,36 +1,32 @@
 {
   "task": [
     {
-      "task": "coding most",
-      "time": "22:43",
-      "id": 1
-    },
-    {
-      "task": "cricket",
-      "time": "20:12",
-      "id": 2
-    },
-    {
-      "task": "Maa",
-      "time": "00:20",
-      "id": 3
-    },
-    {
-      "task": "hey",
-      "time": "23:23",
-      "id": 4
-    },
-    {
-      "task": "aaafa",
-      "time": "23:24",
+      "task": "coding",
+      "time": "02:10",
       "cmplt": false,
-      "id": 5
+      "id": 8,
+      "status": "DONE"
     },
     {
-      "task": "my name is mrinal",
-      "time": "00:34",
+      "task": "coding",
+      "time": "01:29",
       "cmplt": false,
-      "id": 6
+      "status": "FAILD",
+      "id": 9
+    },
+    {
+      "task": "Pubg",
+      "time": "01:39",
+      "cmplt": false,
+      "status": "FAILD",
+      "id": 10
+    },
+    {
+      "task": "coding",
+      "time": "01:47",
+      "cmplt": false,
+      "status": "FAILD",
+      "id": 11
     }
   ]
 }

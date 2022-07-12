@@ -1,5 +1,5 @@
 import styles from './Button.module.css'
 
-const Button = ({children, handlebtnClick}) => <button className={styles.button} onClick={handlebtnClick}>{children}</button>
+const Button = ({children, handlebtnClick,handelDisable}) => <button className={styles.button} onClick={handlebtnClick} disabled={handelDisable}>{children}</button>
 
 export default Button

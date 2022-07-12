@@ -19,3 +19,11 @@ table, td, th {
     font-size: larger
   }
   
+  .btn{
+    width: 2vw;
+    font-size: larger;
+    color: rgb(34, 29, 29);
+  }
+  .btn:hover{
+    color: red;
+  }
