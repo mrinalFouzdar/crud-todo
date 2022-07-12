@@ -1,32 +1,32 @@
 {
   "task": [
     {
-      "task": "coding",
-      "time": "02:10",
+      "task": "Sleep",
+      "time": "07:00",
       "cmplt": false,
-      "id": 8,
-      "status": "DONE"
+      "status": "Pending",
+      "id": 1
+    },
+    {
+      "task": "DSA",
+      "time": "11:40",
+      "cmplt": false,
+      "status": "Pending",
+      "id": 2
     },
     {
       "task": "coding",
-      "time": "01:29",
+      "time": "14:50",
       "cmplt": false,
-      "status": "FAILD",
-      "id": 9
+      "status": "Pending",
+      "id": 3
     },
     {
-      "task": "Pubg",
-      "time": "01:39",
+      "task": "cricket",
+      "time": "16:00",
       "cmplt": false,
-      "status": "FAILD",
-      "id": 10
-    },
-    {
-      "task": "coding",
-      "time": "01:47",
-      "cmplt": false,
-      "status": "FAILD",
-      "id": 11
+      "status": "DONE",
+      "id": 4
     }
   ]
 }
