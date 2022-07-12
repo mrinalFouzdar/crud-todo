@@ -16,8 +16,9 @@ function Home() {
       }
       timRef.current=setInterval(()=>{
         let time = handtimeconvert()
-          setCount(Date.now())
-      },1000)
+        // console.log(time);
+          setCount(time)
+      },2000)
       setIstimerRunning(true)
   }
 
@@ -32,21 +33,53 @@ function Home() {
   },[])
 
   const handtimeconvert=()=>{
-    
+    let cur_time = new Date()
+   let conver= cur_time.getHours() + ":" + cur_time.getMinutes() 
+   
+  //  console.log(conver);
+    return conver
   }
   // console.log(tasks);
   const nevigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleDelete = (id) => {
+    console.log(id);
     dispatch(deleteTodos(id));
   };
+
   const handleNevigat = () => {
     nevigate("/from");
   };
+
+
+  const handleTime=(target,cur)=>{
+    if(!cur || !target){
+      return "wait"
+    }
+    let[tar_h,tar_m]=target.split(":").map(Number)
+    let[cur_h,cur_m]=cur.split(":").map(Number)
+    // console.log(tar_h);
+    // if()
+    // let show_time =(`${cur}`)
+    let show_hour =(tar_h-cur_h)
+    let show_min =Math.abs(tar_m-cur_m)
+    console.log(show_min);
+    show_hour = (show_hour <=0? 0 : show_hour)
+
+    if(show_hour <= 0 && show_min<=0 ){
+        return "FAILD"
+    }else{
+      return (`${show_hour}:${show_min}`)
+    }
+
+    
+  }
+
   return (
     <div>
       <div>
-        <button onClick={() => handleNevigat()}> ADD TODO</button>
+        <Button handlebtnClick={() => handleNevigat()}> ADD TODO</Button>
       </div>
       <table>
         <thead>
@@ -62,11 +95,11 @@ function Home() {
             tasks.map((data) => (
               <tr key={data.id}>
                 <td>{data.task}</td>
-                <td>{data.time}
-                {Date.now()}
+                <td>
+                {handleTime(data.time,count)}
                 </td>
                 <td>
-                  <Button onClick={() => handleDelete(data.id)}>
+                  <Button handlebtnClick={()=>handleDelete(data.id)}>
                     <AiFillDelete />
                   </Button>
                   <Button >
